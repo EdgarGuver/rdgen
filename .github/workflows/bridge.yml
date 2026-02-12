@@ -26,11 +26,9 @@ jobs:
         job:
           - {
               target: x86_64-unknown-linux-gnu,
-              os: self-hosted,
+              os: ubuntu-24.04,
               extra-build-args: "",
             }
-    container:
-      image: ubuntu:22.04
     steps:
       - name: Checkout source code
         if: ${{ inputs.version != 'master' }}
