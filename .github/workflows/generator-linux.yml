@@ -641,6 +641,9 @@ jobs:
     name: Build appimage ${{ matrix.job.target }}
     needs: [build-rustdesk-linux]
     runs-on: self-hosted
+    container:
+      image: ubuntu:22.04
+      options: --privileged
     strategy:
       fail-fast: false
       matrix:
@@ -868,7 +871,9 @@ jobs:
   deploy:
     needs: [build-rustdesk-linux,build-flatpak,build-appimage]
     if: always()
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    container:
+      image: ubuntu:22.04
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -917,7 +922,9 @@ jobs:
 
   cleanup:
     needs: [build-rustdesk-linux,build-flatpak,build-appimage,deploy]
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
+    container:
+      image: ubuntu:22.04
     continue-on-error: true
     if: always()
     steps:

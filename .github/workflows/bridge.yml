@@ -29,6 +29,8 @@ jobs:
               os: self-hosted,
               extra-build-args: "",
             }
+    container:
+      image: ubuntu:22.04
     steps:
       - name: Checkout source code
         if: ${{ inputs.version != 'master' }}
